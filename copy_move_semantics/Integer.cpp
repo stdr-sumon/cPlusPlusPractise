@@ -12,17 +12,20 @@ Integer::Integer(int value) {
 	m_ptr = new int(value);
 }
 
+//Copy contructor of Integer class
 Integer::Integer(const Integer& obj) {
 	std::cout << "Integer(const Integer&)" << std::endl;
 	m_ptr = new int(*obj.m_ptr);
 }
 
+//Move contructor of Integer class
 Integer::Integer(Integer&& obj) noexcept(false) {
 	std::cout << "Integer(Integer&&)" << std::endl;
 	m_ptr = obj.m_ptr;
 	obj.m_ptr = nullptr;
 }
 
+//Copy assignment of Integer class
 Integer& Integer::operator=(const Integer& obj) {
 	std::cout << "operator=(const Integer&)" << std::endl;
 	if (this == &obj) {
@@ -34,6 +37,7 @@ Integer& Integer::operator=(const Integer& obj) {
 	return *this;
 }
 
+//Move assignment of Integer class
 Integer& Integer::operator=(Integer&& obj) noexcept(false) {
 	std::cout << "operator=(Integer&&)" << std::endl;
 	if (this == &obj) {
@@ -47,10 +51,14 @@ Integer& Integer::operator=(Integer&& obj) noexcept(false) {
 }
 
 void Integer::SetValue(int value) {
+	// if the calling object is in unspecified condition that time we need to allocate memory for its member variables
+	if (m_ptr == nullptr) {
+		m_ptr = new int{};
+	}
 	*m_ptr = value;
 }
 
-int Integer::GetValue() const {
+int Integer::GetValue() const {	
 	return *m_ptr;
 }
 
