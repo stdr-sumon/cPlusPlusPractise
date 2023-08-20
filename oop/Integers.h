@@ -9,4 +9,5 @@ public:
 	void SetValue(int value);
 	int GetValue()const;
 	~Integers();
+
 };
